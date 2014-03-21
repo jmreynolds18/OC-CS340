@@ -8,6 +8,7 @@ typedef struct node{
 
 main(){
  void printList(NodePtr);
+ NodePtr addNode(NodePtr top, NodePtr np, int n, NodePtr makeNode());
  NodePtr makeNode(int);
  int n;
  NodePtr top, np;
@@ -22,6 +23,12 @@ main(){
  }
  printList(top);
 }
+
+NodePtr addNode(NodePtr top, NodePtr np, int n, NodePtr makeNode()){
+ np = makeNode(n);
+ np -> next = top;
+ top = np;
+} 
 
 NodePtr makeNode(int n){
  NodePtr np = (NodePtr) malloc(sizeof (Node));
