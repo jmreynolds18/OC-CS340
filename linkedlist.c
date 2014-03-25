@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 typedef struct node{
  int num;
@@ -8,26 +9,27 @@ typedef struct node{
 
 main(){
  void printList(NodePtr);
- NodePtr addNode(NodePtr top, NodePtr np, int n, NodePtr makeNode());
+ NodePtr addNode();
  NodePtr makeNode(int);
  int n;
  NodePtr top, np;
  
  top = NULL;
  if (scanf("%d", &n) !=1) n=0;
+ 
  while(n!=0){
-  np = makeNode(n);	     //makes a new node which contains n
-  np -> next = top;	     //sets top if first node
-  top =np;                   //set top to point to new node
+   np = makeNode(n);
+   addNode(&top, np);
   if (scanf("%d",&n)!=1) n=0;
  }
  printList(top);
+// printf("INT_MAX: %d\n", np -> num); this just takes whatever is at the top of the list and prints it.
+// printf("INT_MIN: %d\n", );
 }
 
-NodePtr addNode(NodePtr top, NodePtr np, int n, NodePtr makeNode()){
- np = makeNode(n);
- np -> next = top;
- top = np;
+NodePtr addNode(NodePtr *top, NodePtr np){
+   np -> next = *top;
+   *top = np;
 } 
 
 NodePtr makeNode(int n){
@@ -43,3 +45,5 @@ void printList(NodePtr np){
    np = np -> next;         //go on to the next node
  }
 }
+
+//max min needs to be a nodeptr to top and max min needs to be a function.
